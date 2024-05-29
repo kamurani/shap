@@ -1,7 +1,7 @@
 import json
 import random
 import string
-from typing import Optional
+from typing import Optional, Union
 
 import matplotlib.pyplot as pl
 import numpy as np
@@ -19,21 +19,21 @@ from ..utils._legacy import kmeans
 from . import colors
 
 
-def image(shap_values: Explanation or np.ndarray,
+def image(shap_values: Union[Explanation, list[np.ndarray]],
           pixel_values: Optional[np.ndarray] = None,
-          labels: Optional[list or np.ndarray] = None,
+          labels: Optional[Union[list, np.ndarray]] = None,
           true_labels: Optional[list] = None,
           width: Optional[int] = 20,
           aspect: Optional[float] = 0.2,
           hspace: Optional[float] = 0.2,
           labelpad: Optional[float] = None,
-          cmap: Optional[str or Colormap] = colors.red_transparent_blue,
+          cmap: Optional[Union[str, Colormap]] = colors.red_transparent_blue,
           show: Optional[bool] = True):
     """Plots SHAP values for image inputs.
 
     Parameters
     ----------
-    shap_values : [numpy.array]
+    shap_values : numpy.array or Explanation
         List of arrays of SHAP values. Each array has the shape
         (# samples x width x height x channels), and the
         length of the list is equal to the number of model outputs that are being
